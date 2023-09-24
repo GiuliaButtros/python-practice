@@ -17,13 +17,28 @@ print(tabela_vendas)
 
 # Usar:  tabela_vendas[['ID Loja', 'Valor Final']] e tabela_vendas.groupby('ID Loja').sum() // tabela filtrada agrupa todas as lojas e soma o faturamento total por loja =
 
+# 2 colchetes [[]] para filtrar mais de uma coluna, 1 colchete [] para filtrar 1 coluna
+
 faturamento = tabela_vendas[['ID Loja', 'Valor Final']].groupby('ID Loja').sum()
 
 print(faturamento)
 
-
 # Quantidade de produtos vendidos por loja
 
+quantidade = tabela_vendas[['ID Loja', 'Quantidade']].groupby('ID Loja').sum()
+
+print(quantidade)
+
+print('-' * 50)
+
 # Ticket médio por produto em cada loja
+
+# ticket_medio = faturamento['Valor Final'] / quantidade['Quantidade'] ----- dessa forma não é criada uma tabela, é criada uma série de dados
+
+#Quando for para dividir uma coluna por outra:
+
+ticket_medio = (faturamento['Valor Final'] / quantidade['Quantidade']).to_frame()
+
+print(ticket_medio)
 
 # Enviar email com o relatório
